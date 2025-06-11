@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import ProjectModal from "@/components/ProjectModal"; // 추가
 import {
   Globe,
   Users,
@@ -40,6 +41,8 @@ const Index = () => {
     project: "",
     targetCountry: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -340,11 +343,9 @@ const Index = () => {
                     <Textarea
                       placeholder="어떤 프로젝트를 함께 진행하고 싶으신지 간단히 설명해주세요"
                       value={formData.project}
-                      onChange={(e) =>
-                        setFormData({ ...formData, project: e.target.value })
-                      }
-                      rows={4}
-                      required
+                      readOnly
+                      onClick={() => setShowModal(true)}
+                      className="cursor-pointer bg-gray-50"
                     />
                   </div>
 
@@ -358,6 +359,12 @@ const Index = () => {
                   </Button>
                 </form>
               </CardContent>
+              <ProjectModal
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                initialText={formData.project}
+                onSave={(text) => setFormData({ ...formData, project: text })}
+              />
             </Card>
           </div>
         </div>
