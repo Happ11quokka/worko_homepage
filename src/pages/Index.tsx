@@ -17,7 +17,9 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import ProjectModal from "@/components/ProjectModal"; // 추가
+import ProjectModal from "@/components/ProjectModal";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import {
   Globe,
   Users,
@@ -41,16 +43,49 @@ const Index = () => {
     project: "",
     targetCountry: "",
   });
-
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "프로젝트 제안이 접수되었습니다!",
-      description: "24시간 내에 담당자가 연락드리겠습니다.",
-    });
-    setFormData({ company: "", email: "", project: "", targetCountry: "" });
+
+    // 프로젝트 내용이 비어있는지 확인
+    if (!formData.project.trim()) {
+      toast({
+        title: "프로젝트 내용을 입력해주세요",
+        description: "프로젝트 내용은 필수 입력 항목입니다.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Firestore에 데이터 저장
+      await addDoc(collection(db, "projectProposals"), {
+        ...formData,
+        createdAt: Timestamp.now(),
+        status: "pending", // 제안서 상태 추가
+      });
+
+      toast({
+        title: "프로젝트 제안이 접수되었습니다!",
+        description: "24시간 내에 담당자가 연락드리겠습니다.",
+      });
+
+      // 폼 초기화
+      setFormData({ company: "", email: "", project: "", targetCountry: "" });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      toast({
+        title: "제출 중 오류가 발생했습니다",
+        description: "잠시 후 다시 시도해주세요.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -302,6 +337,7 @@ const Index = () => {
                           setFormData({ ...formData, company: e.target.value })
                         }
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div>
@@ -316,6 +352,7 @@ const Index = () => {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -333,6 +370,7 @@ const Index = () => {
                           targetCountry: e.target.value,
                         })
                       }
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -345,7 +383,8 @@ const Index = () => {
                       value={formData.project}
                       readOnly
                       onClick={() => setShowModal(true)}
-                      className="cursor-pointer bg-gray-50"
+                      className="cursor-pointer bg-gray-50 min-h-[100px]"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -353,9 +392,16 @@ const Index = () => {
                     type="submit"
                     size="lg"
                     className="w-full bg-blue-600 hover:bg-blue-700"
+                    disabled={isSubmitting}
                   >
-                    <Mail className="mr-2 h-4 w-4" />
-                    프로젝트 제안서 제출하기
+                    {isSubmitting ? (
+                      <>제출 중...</>
+                    ) : (
+                      <>
+                        <Mail className="mr-2 h-4 w-4" />
+                        프로젝트 제안서 제출하기
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
