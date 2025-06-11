@@ -451,11 +451,11 @@ const Index = () => {
                 열어갑니다.
               </p>
               <div className="flex space-x-4">
-                <Button variant="outline" size="sm">
+                <Button variant="ghost" size="sm">
                   <Mail className="h-4 w-4 mr-2" />
                   contact@WORKO.co.kr
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button variant="ghost" size="sm">
                   <Phone className="h-4 w-4 mr-2" />
                   02-1234-5678
                 </Button>
