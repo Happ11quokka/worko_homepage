@@ -513,14 +513,16 @@ const Index = () => {
                 열어갑니다.
               </p>
               <div className="flex space-x-4">
-                <Button variant="ghost" size="sm">
-                  <Mail className="h-4 w-4 mr-2" />
-                  contact@WORKO.co.kr
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <Phone className="h-4 w-4 mr-2" />
-                  02-1234-5678
-                </Button>
+                <a
+                  href="https://open.kakao.com/o/s2qO4fBh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button size="ghost" variant="sm">
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    문의하기
+                  </Button>
+                </a>
               </div>
             </div>
 
