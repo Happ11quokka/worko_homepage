@@ -145,14 +145,16 @@ const Index = () => {
               <ArrowRight className="mr-2 h-4 w-4" />
               프로젝트 등록하기
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => (window.location.href = "#contact")}
+            <a
+              href="https://open.kakao.com/o/s2qO4fBh"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <MessageSquare className="mr-2 h-4 w-4" />
-              문의하기
-            </Button>
+              <Button size="lg" variant="outline">
+                <MessageSquare className="mr-2 h-4 w-4" />
+                문의하기
+              </Button>
+            </a>
           </div>
         </div>
       </section>
