@@ -110,13 +110,12 @@ const Index = () => {
             >
               사례
             </a>
-            <a
-              href="#contact"
-              className="text-sm font-medium hover:text-blue-600 transition-colors"
+            <Button
+              size="sm"
+              onClick={() => (window.location.href = "#contact")}
             >
-              문의
-            </a>
-            <Button size="sm">프로젝트 등록</Button>
+              프로젝트 등록
+            </Button>
           </div>
         </div>
       </nav>
@@ -138,11 +137,19 @@ const Index = () => {
             검증된 외국인 유학생과 의미 있는 프로젝트를 시작하세요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700"
+              onClick={() => (window.location.href = "#contact")}
+            >
               <ArrowRight className="mr-2 h-4 w-4" />
               프로젝트 등록하기
             </Button>
-            <Button size="lg" variant="outline">
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => (window.location.href = "#contact")}
+            >
               <MessageSquare className="mr-2 h-4 w-4" />
               문의하기
             </Button>
@@ -155,7 +162,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              왜 WORKO을 선택해야 할까요?
+              왜 WORKO를 선택해야 할까요?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               기업과 유학생 모두에게 의미 있는 기회를 제공합니다
@@ -251,7 +258,7 @@ const Index = () => {
               <CardContent>
                 <p className="text-gray-600 mb-4">
                   "일본 진출을 준비하며 현지 소비자 트렌드를 파악하는 것이 가장
-                  큰 과제였습니다. WORKO을 통해 만난 일본 유학생과 함께
+                  큰 과제였습니다. WORKO를 통해 만난 일본 유학생과 함께
                   인스타그램, 트위터 등 SNS 플랫폼의 뷰티 리뷰를 분석하여 현지
                   선호도를 정확히 파악할 수 있었습니다."
                 </p>
