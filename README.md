@@ -66,7 +66,3 @@ firebase deploy
 | `components.json` | shadcn/ui 컴포넌트 설정 |
 | `firebase.json` | Firebase 프로젝트 설정 |
 | `firestore.rules` | Firestore 보안 규칙 |
-
----
-
-> 💡 **참고**: 프로젝트의 세부 파일 내용이 필요하시면 요청해 주세요!
