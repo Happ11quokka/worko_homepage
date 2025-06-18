@@ -518,7 +518,7 @@ const Index = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button size="ghost" variant="sm">
+                  <Button size="sm" variant="ghost">
                     <MessageSquare className="mr-2 h-4 w-4" />
                     문의하기
                   </Button>
